@@ -9,13 +9,13 @@ class AddUserController extends Controller
 {
     // add user
     public function add_Users(Request $req)
-    {
-        $user = DB::table('crud__operation')->insert([
-            'name' => $req->name,
-            'city' => $req->city,
-            'email' => $req->email,
-            'age' => $req->age,
 
+    {
+        $user = DB::table('registration')->insert([
+            'name' => $req->name,
+            'email' => $req->email,
+            'created_at' => $req->date(''),
+            'updated_at' => $req->date(''),
         ]);
 
         if ($user) {
@@ -25,24 +25,25 @@ class AddUserController extends Controller
 
     // display user
 
-    public function displayUser()
+    public function display_User()
     {
-        $user = DB::table('crud__operation')->get();
+        $id =   session('id');
+  
+        $user = DB::table('registration')->get();
         return view('allUsrs', ['data' => $user]);
     }
 
     // update user
     public function updateUser(Request $req)
-    {
-        $user = DB::table('crud__operation')
-            ->where('id', $req->id)
+    {    $currentDateTime = date('Y-m-d H:i:s');
+
+        $id =   session('id');
+        $user = DB::table('registration')
+            ->where('id', $id)
             ->update([
                 'name' => $req->name,
-                'city' => $req->city,
                 'email' => $req->email,
-                'age' => $req->age,
-
-                'updated_at' => $req->date(''),
+                'updated_at' => $currentDateTime,
             ]);
         if ($user) {
             return redirect()->route('displayUser');
@@ -52,7 +53,7 @@ class AddUserController extends Controller
     //delete user 
     public function  delete_user(string $id)
     {
-        $user = DB::table('crud__operation')
+        $user = DB::table('registration')
             ->where('id', $id)->delete();
         if ($user) {
             return redirect()->route('displayUser');

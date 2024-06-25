@@ -23,22 +23,19 @@
                         <th>id</th>
                         <th>name</th>
                         <th>email</th>
-                        <th>city</th>
-                        <th>age</th>
                         <th>view</th>
                         <th>delete</th>
                     </tr>
-                    @foreach ($data as $id => $u)
+                    @foreach ($data as $id => $user)
                         <tr>
 
-                            <td> {{ $u->id }}</td>
-                            <td> {{ $u->name }}</td>
-                            <td>{{ $u->email }}</td>
-                            <td>{{ $u->city }}</td>
-                            <td>{{ $u->age }}</td>
-                            <td><a href="{{ route('update_new', ['id' => $u->id]) }}"
+                            <td> {{ $user->id }}</td>
+                            <td> {{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                           
+                            <td><a href="{{ route('update_new', ['id' => $user->id]) }}"
                                     class="btn btn-primary btn-sm">update</a>
-                            <td><a href="{{ route('update.User', $u->id) }}" class="btn btn-danger btn-sm">delete</a>
+                            <td><a href="{{ route('update.User', $user->id) }}" class="btn btn-danger btn-sm">delete</a>
                             </td>
                         </tr>
                     @endforeach

@@ -17,10 +17,24 @@
     <div class="container">
         <div class="row">
             <div class="col-4">
-                <a href="{{route('add_new')}}" class="btn  btn-success btn-sm mt-4">Add</a>
-                <a href="{{route('displayUser')}}" class="btn  btn-primary btn-sm mt-4">display</a>
+                {{-- <a href="{{ route('add_new') }}" class="btn  btn-success btn-sm mt-4">Add</a> --}}
+                <a href="{{ route('displayUser') }}" class="btn  btn-primary btn-sm mt-4">display</a>
                 <h3>crud Operation
                 </h3>
+                <form action="{{ route('logout_user') }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn  btn-danger btn-sm mt-4">logout</button>
+                </form>
+                <div class="cookie">
+                    <h3>Cookie Section</h3>
+                    {{-- Check if 'Useremail' cookie is set --}}
+                    @if(request()->cookie('Useremail'))
+                        <p>This page contains a cookie.</p>
+                    @else
+                        <p>This page doesn't contain a cookie.</p>
+                    @endif
+
+                </div>
             </div>
         </div>
     </div>
